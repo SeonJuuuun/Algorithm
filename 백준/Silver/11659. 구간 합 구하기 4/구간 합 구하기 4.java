@@ -18,11 +18,7 @@ public class Main {
 		st = new StringTokenizer(br.readLine());
 
 		for (int i = 1; i <= N; i++) {
-			arr[i] = Integer.parseInt(st.nextToken());
-		}
-
-		for (int i = 1; i <= N; i++) {
-			arr[i] = arr[i - 1] + arr[i];
+			arr[i] = arr[i - 1] + Integer.parseInt(st.nextToken());
 		}
 
 		StringBuilder sb = new StringBuilder();
@@ -31,11 +27,10 @@ public class Main {
 			st = new StringTokenizer(br.readLine());
 			int a = Integer.parseInt(st.nextToken());
 			int b = Integer.parseInt(st.nextToken());
-			if(a ==1 ){
+			if (a == 1) {
 				sb.append(arr[b]).append('\n');
-			}
-			else
-				sb.append(arr[b]-arr[a-1]).append('\n');
+			} else
+				sb.append(arr[b] - arr[a - 1]).append('\n');
 		}
 		System.out.println(sb);
 	}
