@@ -1,66 +1,66 @@
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
+import java.util.StringTokenizer;
 
 public class Main {
-	static int[][] map;
+
 	static int M;
 	static int N;
-	static boolean[][] visited;
-	static int[] dx = {0,0,-1,1};
-	static int[] dy = {-1,1,0,0};
+	static int K;
+	static int map[][];
+	static int[] dx = {0, 0, -1, 1};
+	static int[] dy = {-1, 1, 0, 0};
+	static boolean[][] visit;
+	static int count;
+
 	public static void main(String[] args) throws IOException {
 		BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
-
 		int T = Integer.parseInt(br.readLine());
-
-
+		StringTokenizer st;
 
 		for (int i = 0; i < T; i++) {
+			count = 0;
+			st = new StringTokenizer(br.readLine());
 
-			String[] s = br.readLine().split(" ");
-			M = Integer.parseInt(s[0]);
-			N = Integer.parseInt(s[1]);
-			int K = Integer.parseInt(s[2]);
+			M = Integer.parseInt(st.nextToken());
+			N = Integer.parseInt(st.nextToken());
+			K = Integer.parseInt(st.nextToken());
 			map = new int[M][N];
-			visited = new boolean[M][N];
+			visit = new boolean[M][N];
+
 			for (int j = 0; j < K; j++) {
-				String[] s1 = br.readLine().split(" ");
-				int x = Integer.parseInt(s1[0]);
-				int y = Integer.parseInt(s1[1]);
-				map[x][y]=1;
+				st = new StringTokenizer(br.readLine());
+				int a = Integer.parseInt(st.nextToken());
+				int b = Integer.parseInt(st.nextToken());
+				map[a][b] = 1;
 			}
-			int count =0;
 
 			for (int j = 0; j < M; j++) {
 				for (int k = 0; k < N; k++) {
-					if(map[j][k] == 1 && !visited[j][k]){
-						dfs(j,k);
+					if (map[j][k] == 1 && !visit[j][k]) {
+						dfs(j, k);
 						count++;
 					}
 				}
 			}
 			System.out.println(count);
-			count = 0;
-			
+
 		}
 
 	}
 
 	public static void dfs(int x, int y) {
-		visited[x][y] = true;
-
+		visit[x][y] = true;
 		for (int i = 0; i < 4; i++) {
-			int nextX = x + dx[i];
-			int nextY = y + dy[i];
-			if(nextX >= 0 && nextY >= 0 && nextX < M && nextY < N){
-				if(map[nextX][nextY] == 1 && !visited[nextX][nextY]){
-						dfs(nextX,nextY);
+			int next_x = x + dx[i];
+			int next_y = y + dy[i];
+			if (next_x >= 0 && next_y >= 0 && next_x < M && next_y < N) {
+				if (map[next_x][next_y] == 1 && !visit[next_x][next_y]) {
+					dfs(next_x, next_y);
 				}
 			}
 		}
-
-
-
 	}
+
 }
