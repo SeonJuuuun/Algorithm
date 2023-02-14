@@ -1,70 +1,72 @@
+import java.io.BufferedReader;
+import java.io.IOException;
+import java.io.InputStreamReader;
 import java.util.Arrays;
 import java.util.LinkedList;
 import java.util.Queue;
-import java.util.Scanner;
+import java.util.StringTokenizer;
 
 public class Main {
-
-	public static int[][] branch;
-	public static boolean[] visit;
-	public static Queue<Integer> queue;
 	public static int N;
-	public static int V;
 	public static int M;
+	public static int V;
+	public static boolean[] visit;
+	public static int[][] arr;
+	public static StringBuilder sb = new StringBuilder();
+	public static Queue<Integer> q = new LinkedList<>();
 
-	public static void main(String[] args) {
-		Scanner sc = new Scanner(System.in);
-		N = sc.nextInt();
-		M = sc.nextInt();
-		V = sc.nextInt();
+	public static void main(String[] args) throws IOException {
+		BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
+		StringTokenizer st = new StringTokenizer(br.readLine());
+		N = Integer.parseInt(st.nextToken());
+		M = Integer.parseInt(st.nextToken());
+		V = Integer.parseInt(st.nextToken());
 
-		branch = new int[1001][1001];
-		visit = new boolean[1001];
+		arr = new int[N+1][N+1];
+		visit = new boolean[N+1];
+
+
 
 		for (int i = 0; i < M; i++) {
-			int a = sc.nextInt();
-			int b = sc.nextInt();
-			branch[a][b] = branch[b][a] = 1;
+			st = new StringTokenizer(br.readLine());
+			int x = Integer.parseInt(st.nextToken());
+			int y = Integer.parseInt(st.nextToken());
+
+			arr[x][y] = arr[y][x] = 1;
 		}
 
 		dfs(V);
-		System.out.println();
-
 		Arrays.fill(visit, false);
 		bfs(V);
+		System.out.println(sb);
 	}
 
-	public static void dfs(int start) {
-		visit[start] = true;
-		System.out.print(start + " ");
+	public static void dfs(int num) {
+		visit[num] = true;
+		sb.append(num).append(" ");
 		for (int i = 1; i <= N; i++) {
-			if (branch[start][i] == 1 && visit[i] == false) {
+			if(arr[num][i] == 1 && !visit[i]){
 				dfs(i);
 			}
-
 		}
 	}
 
-	public static void bfs(int start) {
-		queue = new LinkedList<Integer>();
-		queue.add(start);
-		visit[start] = true;
-		System.out.print(start + " ");
-
-		while (!queue.isEmpty()) {
-			int temp = queue.poll();
-
-			for (int i = 1; i < branch.length; i++) {
-				if (branch[temp][i] == 1 && visit[i] == false) {
-					queue.add(i);
+	public static void bfs(int num) {
+		q.add(num);
+		visit[num] = true;
+		sb.append('\n').append(num).append(" ");
+		while (!q.isEmpty()) {
+			int idx = q.poll();
+			for (int i = 1; i <= N; i++) {
+				if(arr[idx][i] == 1 && !visit[i]){
+					q.add(i);
 					visit[i] = true;
-					System.out.print(i + " ");
+					sb.append(i).append(" ");
 				}
+
 			}
 		}
+
+
 	}
 }
-
-
-
-
