@@ -4,14 +4,13 @@ import java.io.InputStreamReader;
 import java.util.StringTokenizer;
 
 public class Main {
-	public static int N;
 	public static int[][] board;
 	public static StringBuilder sb = new StringBuilder();
 
 	public static void main(String[] args) throws IOException {
 		BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
 
-		N = Integer.parseInt(br.readLine());
+		int N = Integer.parseInt(br.readLine());
 		board = new int[N][N];
 
 		for (int i = 0; i < N; i++) {
