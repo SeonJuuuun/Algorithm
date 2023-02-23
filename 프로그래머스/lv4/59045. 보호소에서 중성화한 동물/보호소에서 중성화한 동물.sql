@@ -1,0 +1,16 @@
+
+SELECT I.ANIMAL_ID, I.ANIMAL_TYPE, I.NAME 
+FROM ANIMAL_INS as I JOIN ANIMAL_OUTS as O 
+WHERE I.ANIMAL_ID = O.ANIMAL_ID AND I.SEX_UPON_INTAKE != O.SEX_UPON_OUTCOME
+ORDER BY I.ANIMAL_ID
+
+
+
+
+
+# 1. 조인부터 한다.  O
+# 2. 보호소 들어올땐 중성화 x
+# 3. 보호소 나갈땐 중성화 o
+# 4. 아이디순으로 정렬
+
+
