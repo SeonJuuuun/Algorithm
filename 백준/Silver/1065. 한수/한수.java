@@ -1,40 +1,32 @@
-
-
-import java.io.BufferedReader;
-import java.io.IOException;
-import java.io.InputStreamReader;
-import java.util.LinkedList;
-import java.util.Queue;
-import java.util.Stack;
-
-
+import java.util.*;
+import java.io.*;
 
 public class Main {
-	public static void main(String[] args) throws IOException{
+	public static void main(String[] args) throws IOException {
 		BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
-		System.out.println(find(Integer.parseInt(br.readLine())));
+		int N = Integer.parseInt(br.readLine());
 
+		int answer = 0;
+		int hun = 0;
+		int ten = 0;
+		int one = 0;
 
-
-
-	}
-
-	public static int find(int num) {
-		int count = 0;
-
-		if(num < 100){
-			return num;
+		if (N < 100) {
+			answer = N;
 		}
 		else
-			count = 99;
-		for (int i = 100; i <= num; i++) {
-			int hun = i / 100;
-			int ten = (i / 10) % 10;
-			int one = i % 10;
-			if((hun-ten) == (ten - one)){
-				count++;
+		answer = 99;
+		for (int i = 100; i <= N; i++) {
+
+			hun = i / 100;
+			ten = (i % 100) / 10;
+			one = i % 10;
+			if (hun - ten == ten - one) {
+				answer++;
 			}
 		}
-		return count;
+
+
+		System.out.println(answer);
 	}
 }
