@@ -6,18 +6,16 @@ public class Main {
         int T = sc.nextInt();
 
         String s = sc.next();
-        char[] array = s.toCharArray();
 
-        int r = 31;
-        int sum = 0;
-
-        int[] newArray = new int[T];
+        long r = 1;
+        long sum = 0;
+        int M = 1234567891;
 
         for (int i = 0; i < T; i++) {
-            newArray[i] = array[i] - '0' - 48;
-            sum += newArray[i] * Math.pow(r, i);
+            sum += ((s.charAt(i) - 'a' + 1) * r) % M;
+            r = (r * 31) % M;
         }
 
-        System.out.println(sum);
+        System.out.println(sum % M);
     }
 }
